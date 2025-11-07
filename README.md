@@ -153,6 +153,7 @@ For connecting to CrateDB Cloud, use a URL like
 
 - `DB_URL`: SQLAlchemy [database URL](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls) (required)
 - `CLAUDE_LOCAL_FILES_PATH`: Directory for full result sets (optional)
+- `CLAUDE_FILE_URL_BASE`: Base URL for accessing saved result files (optional, default: `https://cdn.jsdelivr.net/pyodide/claude-local-files`). Set this to your own file server URL when deploying remotely (e.g., `https://mcp.yourdomain.com/files`)
 - `EXECUTE_QUERY_MAX_CHARS`: Maximum output length (optional, default 4000)
 - `DB_ENGINE_OPTIONS`: JSON string containing additional SQLAlchemy engine options (optional)
 

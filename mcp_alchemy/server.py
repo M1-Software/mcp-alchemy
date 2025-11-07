@@ -101,6 +101,10 @@ VERSION = "2025.8.15.91819"
 DB_INFO = get_db_info()
 EXECUTE_QUERY_MAX_CHARS = int(os.environ.get('EXECUTE_QUERY_MAX_CHARS', 4000))
 CLAUDE_LOCAL_FILES_PATH = os.environ.get('CLAUDE_LOCAL_FILES_PATH')
+CLAUDE_FILE_URL_BASE = os.environ.get(
+    'CLAUDE_FILE_URL_BASE',
+    'https://cdn.jsdelivr.net/pyodide/claude-local-files'
+)
 
 ### MCP ###
 
@@ -233,7 +237,7 @@ def execute_query(query: str, params: dict = {}) -> str:
             json.dump(data, f)
 
         return (
-            f"Full result set url: https://cdn.jsdelivr.net/pyodide/claude-local-files/{file_name}"
+            f"Full result set url: {CLAUDE_FILE_URL_BASE}/{file_name}"
             " (format: [[row1_value1, row1_value2, ...], [row2_value1, row2_value2, ...], ...]])"
             " (ALWAYS prefer fetching this url in artifacts instead of hardcoding the values if at all possible)")
 
