@@ -172,9 +172,8 @@ def execute_query_description():
 
 @mcp.tool(description=execute_query_description())
 def execute_query(query: str, params: dict = {}) -> str:
-    # DEBUG: Log actual values at execution time
-    logger.info(f"EXEC DEBUG: CLAUDE_LOCAL_FILES_PATH={CLAUDE_LOCAL_FILES_PATH}")
-    logger.info(f"EXEC DEBUG: EXECUTE_QUERY_MAX_CHARS={EXECUTE_QUERY_MAX_CHARS}")
+    # DEBUG: Include values in output
+    debug_prefix = f"[DEBUG: PATH={CLAUDE_LOCAL_FILES_PATH}, MAX={EXECUTE_QUERY_MAX_CHARS}]\n"
 
     def format_value(val):
         """Format a value for display, handling None and datetime types"""
@@ -257,9 +256,9 @@ def execute_query(query: str, params: dict = {}) -> str:
             if full_results_message := save_full_results(full_results):
                 output.append(full_results_message)
 
-            return "\n".join(output)
+            return debug_prefix + "\n".join(output)
     except Exception as e:
-        return f"Error: {str(e)}"
+        return debug_prefix + f"Error: {str(e)}"
 
 def main():
     mcp.run()
