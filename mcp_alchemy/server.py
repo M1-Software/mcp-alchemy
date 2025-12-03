@@ -172,6 +172,10 @@ def execute_query_description():
 
 @mcp.tool(description=execute_query_description())
 def execute_query(query: str, params: dict = {}) -> str:
+    # DEBUG: Log actual values at execution time
+    logger.info(f"EXEC DEBUG: CLAUDE_LOCAL_FILES_PATH={CLAUDE_LOCAL_FILES_PATH}")
+    logger.info(f"EXEC DEBUG: EXECUTE_QUERY_MAX_CHARS={EXECUTE_QUERY_MAX_CHARS}")
+
     def format_value(val):
         """Format a value for display, handling None and datetime types"""
         if val is None:
