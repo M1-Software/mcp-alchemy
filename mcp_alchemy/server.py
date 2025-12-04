@@ -172,9 +172,6 @@ def execute_query_description():
 
 @mcp.tool(description=execute_query_description())
 def execute_query(query: str, params: dict = {}) -> str:
-    # DEBUG: Include values in output
-    debug_prefix = f"[DEBUG: PATH={CLAUDE_LOCAL_FILES_PATH}, MAX={EXECUTE_QUERY_MAX_CHARS}]\n"
-
     def format_value(val):
         """Format a value for display, handling None and datetime types"""
         if val is None:
@@ -256,9 +253,9 @@ def execute_query(query: str, params: dict = {}) -> str:
             if full_results_message := save_full_results(full_results):
                 output.append(full_results_message)
 
-            return debug_prefix + "\n".join(output)
+            return "\n".join(output)
     except Exception as e:
-        return debug_prefix + f"Error: {str(e)}"
+        return f"Error: {str(e)}"
 
 def main():
     mcp.run()
